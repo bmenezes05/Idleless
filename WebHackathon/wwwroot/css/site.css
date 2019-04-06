@@ -109,12 +109,12 @@ a:hover {
 }
 
     .btn-secondary:hover {
-        background-color: #d94225;
+        background-color: #182b9d;
         border-color: #185b9d;
     }
 
     .btn-secondary:active {
-        background-color: #d94225 !important;
+        background-color: #182b9d !important;
         border-color: #185b9d !important;
     }
 
