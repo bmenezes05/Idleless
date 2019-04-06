@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="containerIndex" class="mx-3 my-2 px-3 py-2 row">
+    <div class="col-8">
+        <h4>
+            Calendário
+        </h4>
+        <hr class="m-1" />
+        <div class="mt-3 p-4 bg-white" style="height: 400px;">
+            @*<div v-if="carregando">
+                    <div class="text-center">
+                        <i class="spinner text-secondary material-icons">data_usage</i>
+                        <div><b>Carregando</b></div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    <div class="col-4">
+        <h4>
+            Comunicados
+        </h4>
+        <hr class="m-1" />
+        <div class="mt-3 p-4 bg-white" style="height: 200px;">
+
+            @*<div v-if="carregando">
+                    <div class="text-center">
+                        <i class="spinner text-secondary material-icons">data_usage</i>
+                        <div><b>Carregando</b></div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#containerIndex',
+        data: {
+
+        },
+        methods: {
+
+        },
+        mounted: function () {
+
+        }
+    })
+</script>
