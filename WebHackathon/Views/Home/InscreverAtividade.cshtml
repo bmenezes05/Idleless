@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Inscrição em atividade";
+}
+
+<div id="containerInscreverCurso" class="mx-3 my-2 px-3 py-2 row">
+    <div class="col-md-12 col-sm-12 mb-4 p-0">
+        <div class="col-12 mb-4">
+            <h4>
+                Inscrição na atividade
+            </h4>
+            <hr class="m-1" />
+            <div class="mt-3 p-4 bg-white">
+                <h5>Buscar</h5>
+                <hr class="p-0" />
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tipoModalidade">Tipo de Modalidade</label>
+                            <input type="text" class="form-control" id="modalidade" aria-describedby="emailHelp" placeholder="Tipo de Modalidade">
+                            <small id="emailHelp" class="form-text text-muted">Modalidades para lazer descontarão 1 ponto do seu banco.</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="modalidade">Modalidade</label>
+                            <input type="password" class="form-control" id="modalidade" placeholder="Modalidade">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="horarios">Horários disponíveis</label>
+                            <select class="form-control" id="horarios">
+                                <option>12h até 13h</option>
+                                <option>22h até 23h</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 text-right">
+                        <button class="btn btn-secondary">Buscar</button>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th>Atividades</th>
+                            <th>Tipo de Atividade</th>
+                            <th>Horário</th>
+                            <th>Pontuação</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Palestra sobre segurança do trabalho</td>
+                            <td><span class="badge badge-danger">Obrigatória</span></td>
+                            <td>18h - 19h</td>
+                            <td>1</td>
+                            <td><a href="#">Inscrever-se</a></td>
+                        </tr>
+                        <tr>
+                            <td>Pilates</td>
+                            <td><span class="badge badge-success">Lazer</span></td>
+                            <td>13h - 14h</td>
+                            <td>-1</td>
+                            <td><a href="#">Inscrever-se</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#containerInscreverCurso',
+        data: {
+
+        },
+        methods: {
+
+        },
+        mounted: function () {
+
+        }
+    })
+</script>

@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
+h3 {
+    font-family: 'Poppins';
+    font-size: 46px;
+}
+
 h4 {
     font-family: 'Poppins';
     color: #767676;
@@ -68,7 +73,7 @@ a:hover {
         font-family: 'Poppins'
     }
 
-#table-data th:first-child, .table td:first-child {
+#table-data th:first-child {
     position: sticky;
     left: 0;
     background-color: #fff;
@@ -205,7 +210,7 @@ a:hover {
     background-color: #6c757d;
 }
 
-.Erro {
+.badge-obrigatorio {
     color: #fff;
     background-color: #dc3545;
 }
@@ -299,4 +304,9 @@ a:hover {
 .color-vermelho, .color-vermelho:focus {
     color: #f00 !important;
     font-weight:bold;
+}
+.numero-pontos-legenda {
+    font-family: poppins;
+    color: #aaa;
+    font-size: 16px;
 }
