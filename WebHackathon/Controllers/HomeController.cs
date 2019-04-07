@@ -48,9 +48,8 @@ namespace WebHackathon.Controllers
         public ActionResult getQRCode()
         {
             JsonResult result = new JsonResult();
-
-            var bitmap = GerarQRCode(200, 200, "Home/setScore");
-
+            var request = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            var bitmap = GerarQRCode(200, 200, request + "/Home/setScore?pessoaId=2&score=1");
             byte[] imageByteData = ImageToByte2(bitmap);
             string imageBase64Data = Convert.ToBase64String(imageByteData);
             string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
@@ -58,12 +57,22 @@ namespace WebHackathon.Controllers
             return Json(new { data = imageDataURL }, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<ScoreResponse> setScore(string pessoaId,int score)
+        public async Task<ScoreResponse> setScore(string pessoaId, int score)
         {
             ScoreResponse response = new ScoreResponse();
-            MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
-            var result = await myHttp.Post("Score/Pontuacao/", new { PessoaId = "", Pontuacao = "" });
-            response.ResultCode = (int)HttpStatusCode.OK;
+
+            try
+            {
+                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
+                var result = await myHttp.Post("Score/Pontuacao/", new { PessoaId = "", Pontuacao = "" });
+                response.ResultCode = (int)HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                response.ResultCode = (int)HttpStatusCode.InternalServerError;
+            }
+
+       
             return response;
         }
 
