@@ -18,7 +18,7 @@ namespace WebHackathon.Controllers
             return View();
         }
 
-        public AgendamentoResponse getAgendamentos()
+        public AgendamentoResponse getAgendamentos(bool navio, bool atividade)
         {
             AgendamentoResponse response = new AgendamentoResponse();
 

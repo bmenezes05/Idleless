@@ -190,7 +190,7 @@ a:hover {
 
 .main-sidebar {
     /*padding-left: 180px; Descomentar quando houver sidebar*/
-    padding-top: 62px;
+    padding-top: 120px;
 }
 
 .carregando-conteudo {
@@ -309,4 +309,30 @@ a:hover {
     font-family: poppins;
     color: #aaa;
     font-size: 16px;
+}
+
+.checkbox-custom {
+    width: 21px;
+    height: 21px;
+}
+
+.checkbox-label {
+    font-size: 17px;
+}
+
+.margin-navbar {
+    margin-top: 59px;
+}
+
+.navbar-white {
+    background-color: white !important;
+}
+
+.navbar-white a {
+    color: #185b9d !important;
+    font-size: 16px;
+}
+
+.fade.show {
+    display: flex !important;
 }
