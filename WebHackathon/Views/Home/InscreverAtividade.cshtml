@@ -34,7 +34,10 @@
                 <div class="col-12 text-right">
                     <button v-on:click="buscarAgendamentos" class="btn btn-secondary">Buscar</button>
                 </div>
-
+                <div v-if="sucesso" id="erroMensagem" class="col-12 alert alert-success alert-dismissible fade show mt-3">
+                    <button type="button" class="close" v-on:click="fecharAlerta" data-dismiss="alert">&times;</button>
+                    <strong>Sucesso!</strong> &nbsp; Inscrição realizada.
+                </div>
                 <table id="divAgendamento" class="table" style="display: none">
                     <thead>
                         <tr>
@@ -52,7 +55,8 @@
                             <td>{{agendamento.data}}</td>
                             <td>{{agendamento.pontuacao}}</td>
                             <td>
-                                <a href="#" data-toggle="modal" data-target="#inscreverCurso">Inscrever-se</a>
+                                <span v-if="agendamento.inserido">Inscrito</span>
+                                <a v-if="!agendamento.inserido" href="#" data-toggle="modal" data-target="#inscreverCurso">Inscrever-se</a>
                                 <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -67,36 +71,14 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                                                <button data-dismiss="modal" class="btn btn-secondary" v-on:click="inscreverAtividade">Inscrever</button>
+                                                <button data-dismiss="modal" class="btn btn-secondary" v-on:click="inscreverAtividade(agendamento)">Inscrever</button>
                                                 @Html.AntiForgeryToken()
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-
                         </tr>
-                        @*<tr>
-                            <td>Pilates</td>
-                            <td><span class="badge badge-success">Lazer</span></td>
-                            <td>Segunda, 20h - 21h</td>
-                            <td>-1</td>
-                            <td><a href="#">Inscrever-se</a></td>
-                        </tr>
-                        <tr>
-                            <td>Academia</td>
-                            <td><span class="badge badge-success">Lazer</span></td>
-                            <td>Segunda, 23h - 00h</td>
-                            <td>-1</td>
-                            <td><a href="#">Inscrever-se</a></td>
-                        </tr>
-                        <tr>
-                            <td>Conscientização sobre consumo de álcool</td>
-                            <td><span class="badge badge-info">Opcional</span></td>
-                            <td>Terça, 09h - 10h</td>
-                            <td>1</td>
-                            <td><a href="#">Inscrever-se</a></td>
-                        </tr>*@
                     </tbody>
                 </table>
             </div>
@@ -107,38 +89,73 @@
     var app = new Vue({
         el: '#containerInscreverCurso',
         data: {
-            agendamentos: []
+            agendamentos: [],
+            sucesso: false
         },
         methods: {
             buscarAgendamentos: function () {
                 $("#divAgendamento").show();
                 this.agendamentos = [{
                     nome: "Palestra sobre segurança do trabalho",
+                    modalidadeID: 2,
                     status: "Obrigatória",
                     data: "Segunda, 18h - 19h",
-                    pontuacao: "1"
+                    dataAgendamentoInicio: "04/06/2019 14:00:00",
+                    dataAgendamentoFim: "04/06/2019 15:00:00",
+                    pontuacao: "1",
+                    inserido: false
                 },
                 {
                     nome: "Pilates",
+                    modalidadeID: 7,
                     status: "Lazer",
                     data: "Segunda, 20h - 21h",
-                    pontuacao: "-1"
-                    },
+                    dataAgendamentoInicio: "04/06/2019 18:00:00",
+                    dataAgendamentoFim: "04/06/2019 19:00:00",
+                    pontuacao: "-1",
+                    inserido: false
+                },
                 {
-                    nome: "Academia",
+                    nome: "Massagem",
+                    modalidadeID: 8,
                     status: "Lazer",
                     data: "Segunda, 23h - 00h",
-                    pontuacao: "-1"
-                    },
+                    dataAgendamentoInicio: "04/07/2019 12:00:00",
+                    dataAgendamentoFim: "04/07/2019 13:00:00",
+                    pontuacao: "-1",
+                    inserido: false
+                },
                 {
                     nome: "Conscientização sobre consumo de álcool",
+                    modalidadeID: 12,
                     status: "Opcional",
                     data: "	Terça, 09h - 10h",
-                    pontuacao: "1"
+                    dataAgendamentoInicio: "04/07/2019 15:00:00",
+                    dataAgendamentoFim: "04/07/2019 16:00:00",
+                    pontuacao: "1",
+                    inserido: false
                 }]
             },
-            inscreverAtividade: function () {
-                alert("todo");
+            inscreverAtividade: function (data) {
+                var self = this;
+                var dado = data;
+                $.ajax({
+                    url: "../Home/agendar",
+                    data: {
+                        pessoaID: 1,
+                        modalidadeID: data.modalidadeID,
+                        dataAgendamentoInicio: data.dataAgendamentoInicio,
+                        dataAgendamentoFim: data.dataAgendamentoFim,
+                        descricao: data.nome,
+                        detalhe: data.nome
+                    }
+                }).success(function (data) {
+                    dado.inserido = true;
+                    self.sucesso = true;
+                });
+            },
+            fecharAlerta: function () {
+                this.sucesso = false;
             }
         },
         mounted: function () {
