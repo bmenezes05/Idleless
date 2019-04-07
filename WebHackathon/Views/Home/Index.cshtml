@@ -115,6 +115,8 @@
                                         <button data-dismiss="modal" class="btn btn-secondary">Inscrever</button>
                                         @Html.AntiForgeryToken()
                                     </div>
+
+                                 
                                 </div>
                             </div>
                         </div>
@@ -161,6 +163,24 @@
         </div>
     </div>
     <div id="dashboard" class="tab-pane fade col-12 row d-none" role="tabpanel">
+        <div class="col-md-12">
+            <div class="col-8">
+                <h4>
+                    Cursos Realizados
+                </h4>
+                <hr class="m-1" />
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-8">
+                <h4>
+                    Cursos Realizados
+                </h4>
+                <hr class="m-1" />
+                <canvas id="myChart1"></canvas>
+            </div>
+        </div>
 
     </div>
     <div id="previsao" class="tab-pane fade row d-none" role="tabpanel">
@@ -229,7 +249,64 @@
                 });
             },
             initChart: function () {
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var ctx1 = document.getElementById('myChart1').getContext('2d');
+                //var chart = new Chart(ctx, {
+                //    // The type of chart we want to create
+                //    type: 'line',
 
+                //    // The data for our dataset
+                //    data: {
+                //        labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos(sinuca, pebolim, ping pong)', 'Dentista'],
+                //        datasets: [{
+                //            label: 'My First dataset',
+                //            backgroundColor: 'rgb(255, 99, 132)',
+                //            borderColor: 'rgb(255, 99, 132)',
+                //            data: [0, 10, 5, 2, 20, 30]
+                //        }]
+                //    },
+
+                //    // Configuration options go here
+                //    options: {}
+                //});
+
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos(sinuca, pebolim, ping pong)', 'Dentista'],
+                        datasets: [{
+                            label: 'My First dataset',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+
+                var chart = new Chart(ctx1, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos', 'Dentista'],
+                        datasets: [{
+                            label: 'My First dataset',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
             }
         },
         mounted: function () {
