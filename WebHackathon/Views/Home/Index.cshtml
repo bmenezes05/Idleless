@@ -227,7 +227,6 @@
                 scheduler.config.xml_date = "%Y-%m-%d %H:%i";
                 scheduler.init('scheduler_here', new Date(), "week");
                 scheduler.config.readonly_form = true;
-                //block all modifications
                 scheduler.attachEvent("onBeforeDrag", function () { return false; })
                 scheduler.attachEvent("onClick", function () { return false; })
                 scheduler.config.details_on_dblclick = true;
@@ -241,10 +240,10 @@
                 $.ajax({
                     url: "../Home/getAgendamentos",
                     data: { navio: self.checkNavio, atividade: self.checkAtividade }
-                }).success(function (data) {
-                    debugger;
+                }).success(function (result) {
                     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-                    scheduler.parse(data, "json");
+                    //TODO: cores diferentes para tipos de modalidades diferentes
+                    scheduler.parse(JSON.parse(result.data).data, "json");
                     scheduler.updateView();
                 });
             },
