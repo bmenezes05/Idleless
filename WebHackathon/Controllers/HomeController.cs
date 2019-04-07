@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -70,7 +72,7 @@ namespace WebHackathon.Controllers
             try
             {
                 MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
-                var result = await myHttp.Post("Score/Pontuacao/", new { PessoaId = "", Pontuacao = "" });
+                var result = await myHttp.Post("Score/Pontuacao/", new { PessoaId = pessoaId, Pontuacao = score });
                 response.ResultCode = (int)HttpStatusCode.OK;
             }
             catch (Exception ex)
@@ -79,6 +81,52 @@ namespace WebHackathon.Controllers
             }
             
             return View("~/Views/Home/DetalheAtividade.cshtml?validado=true");
+        }
+
+        public async Task<ActionResult> getScore(string pessoaId)
+        {
+            JsonResult result = new JsonResult();
+            List<ScoreResponse> response = new List<ScoreResponse>();
+
+            try
+            {
+                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
+                response = await myHttp.Get<ScoreResponse>(string.Concat("Score/ObterPorPessoaId/", pessoaId));
+                return Json(new { data = response[0].Pontuacao }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = (int)HttpStatusCode.InternalServerError });
+            }
+        }
+
+        public async Task<ActionResult> agendar(AgendamentoRequest request)
+        {
+            AgendamentoInsertResponse response = new AgendamentoInsertResponse();
+
+            try
+            {
+                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
+                var result = await myHttp.Post<AgendamentoInsertResponse>("Agendamento/Incluir/", new {
+                    pessoaID = request.pessoaID,
+                    modalidadeID = request.modalidadeID,
+                    dataAgendamentoInicio = request.dataAgendamentoInicio,
+                    dataAgendamentoFim = request.dataAgendamentoFim,
+                    descricao = request.descricao,
+                    detalhe = request.detalhe,
+                    nomeNavio = "",
+                    statusAgendamento = 0,
+                });
+
+                response.id = result.id;
+                response.ResultCode = (int)HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = (int)HttpStatusCode.InternalServerError });
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         private byte[] ImageToByte2(Image img)

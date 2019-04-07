@@ -9,4 +9,9 @@ namespace WebHackathon.CrossCutting
     {
         public string jsonCalendar { get; set; }
     }
+
+    public class AgendamentoInsertResponse : ResponseBase
+    {
+        public string id { get; set; }
+    }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Newtonsoft.Json;
 
 namespace WebHackathon.CrossCutting
 {
     public class ScoreResponse : ResponseBase
     {
-
+        [JsonProperty(PropertyName = "Pontuacao")]
+        public int Pontuacao { get; set; }
     }
 }

@@ -62,14 +62,14 @@
                             <td><span class="badge badge-danger">Obrigatória</span></td>
                             <td>18h - 19h</td>
                             <td>1</td>
-                            <td><a href="#">Inscrever-se</a></td>
+                            <td><a href="#" v-on:click="agendar">Inscrever-se</a></td>
                         </tr>
                         <tr>
                             <td>Pilates</td>
                             <td><span class="badge badge-success">Lazer</span></td>
                             <td>13h - 14h</td>
-                            <td>-1</td>
-                            <td><a href="#">Inscrever-se</a></td>
+                            <td>0</td>
+                            <td><a href="#"  v-on:click="agendar">Inscrever-se</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,6 +95,24 @@
             },
             buscarAgendamentos: function () {
                 $("#divAgendamento").show();
+            },
+            agendar: function() {
+                var self = this;
+                $.ajax({
+                    url: "../Home/agendar",
+                    data: {
+                        pessoaID: 1,
+                        modalidadeID: 1,
+                        dataAgendamentoInicio: "07/04/2019 00:00:00",
+                        dataAgendamentoFim: "07/04/2019 01:00:00",
+                        descricao: "teste",
+                        detalhe: "teste"
+                    }
+                }).success(function (data) {
+                    if (data.id > 0) {
+
+                    }
+                });
             }
         },
         mounted: function () {

@@ -69,7 +69,7 @@
                 <hr class="m-1" />
                 <div class="mt-3 px-2 pb-3 bg-white">
                     <div class="col-12 text-center p-3">
-                        <h3>11</h3>
+                        <h3>{{ pontuacao }}</h3>
                         <span class="numero-pontos-legenda">Número de pontos</span>
                         <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -219,6 +219,7 @@
         data: {
             checkAtividade: false,
             checkNavio: false,
+            pontuacao: 0,
             agendamentos: []
         },
         methods: {
@@ -306,11 +307,21 @@
                         }
                     }
                 });
-            }
+            },
+            getScore: function () {
+                var self = this;
+                $.ajax({
+                    url: "../Home/getScore",
+                    data: { pessoaId: 1 }
+                }).success(function (result) {
+                    self.pontuacao = result.data;
+                });
+            },
         },
         mounted: function () {
             this.init();
             this.initChart();
+            this.getScore();
         }
     })
 </script>

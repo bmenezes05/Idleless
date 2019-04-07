@@ -28,11 +28,28 @@ namespace WebHackathon.Helper
             return resultfinal;
         }
 
+        public async Task<List<T>> Get<T>(string uri)
+        {
+            var result = await _PathBase
+               .AppendPathSegment(uri)
+               .GetAsync().ReceiveJson<List<T>>();
+            return result;
+        }
+
         public async Task<string> Post(string uri, object obj)
         {
             var result = await _PathBase
                .AppendPathSegment(uri)
                .PostJsonAsync(obj).ReceiveString();
+
+            return result;
+        }
+
+        public async Task<T> Post<T>(string uri, object obj)
+        {
+            var result = await _PathBase
+               .AppendPathSegment(uri)
+               .PostJsonAsync(obj).ReceiveJson<T>();
 
             return result;
         }
