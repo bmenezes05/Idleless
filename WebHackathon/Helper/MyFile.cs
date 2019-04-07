@@ -14,7 +14,7 @@ namespace WebHackathon.Helper
             try
             {
                 string path = System.Web.Hosting.HostingEnvironment.MapPath("~/Json/");
-                FileStream fs = new FileStream(path + "events.json", FileMode.Append);
+                FileStream fs = new FileStream(path + "events.json", FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs);
                 sw.WriteLine(json);
                 sw.Flush();

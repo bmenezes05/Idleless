@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Flurl;
+using Flurl.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,28 +12,20 @@ namespace WebHackathon.Helper
 {
     public class MyHttp
     {
-        HttpClient _HttpClient;
-        public MyHttp(string uri)
+       
+        public MyHttp()
         {
-            _HttpClient = new HttpClient();
-            _HttpClient.BaseAddress = new Uri(uri);
-            _HttpClient.DefaultRequestHeaders.Accept.Clear();
-            _HttpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+   
         }
 
-
-
-        public async Task<string> Get(string path)
+        public async Task<string> Get(string pathBase, string uri)
         {
-            var httpClient = new HttpClient();
-            var response = await httpClient.GetAsync(path);
+            var result = await pathBase
+               .AppendPathSegment(uri)
+               .GetAsync().ReceiveString();
 
-            //will throw an exception if not successful
-            response.EnsureSuccessStatusCode();
-
-            string content = await response.Content.ReadAsStringAsync();
-            return content;
+            var resultfinal = "{\"data\":" + result + "}";
+            return resultfinal;
         }
 
    
