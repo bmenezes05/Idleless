@@ -336,3 +336,7 @@ a:hover {
 .fade.show {
     display: flex !important;
 }
+
+.no-navbar {
+    margin-top: -50px !important;
+}
