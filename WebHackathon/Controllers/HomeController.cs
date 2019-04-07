@@ -21,8 +21,13 @@ namespace WebHackathon.Controllers
             return View();
         }
 
-        public ActionResult DetalheAtividade()
+        public ActionResult DetalheAtividade(bool? validado)
         {
+            if (validado.HasValue)
+                ViewBag.Validado = validado.Value.ToString().ToLower();
+            else
+                ViewBag.Validado = false;
+
             return View();
         }
 
@@ -72,7 +77,7 @@ namespace WebHackathon.Controllers
                 response.ResultCode = (int)HttpStatusCode.InternalServerError;
             }
             
-            return View("~/Views/Home/DetalheAtividade.cshtml");
+            return View("~/Views/Home/DetalheAtividade.cshtml?validado=true");
         }
 
         private byte[] ImageToByte2(Image img)
