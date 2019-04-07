@@ -5,10 +5,6 @@ using System.Web;
 
 namespace WebHackathon.CrossCutting
 {
-    public class ScoreResponseData
-    {
-    }
-
     public class ScoreResponse : ResponseBase
     {
 
