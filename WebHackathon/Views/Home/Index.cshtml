@@ -198,10 +198,12 @@
         el: '#containerIndex',
         data: {
             checkAtividade: false,
-            checkNavio: false
+            checkNavio: false,
+            agendamentos: []
         },
         methods: {
-            init: function () {
+            init: function (dados) {
+                scheduler.clearAll();
                 scheduler.config.xml_date = "%Y-%m-%d %H:%i";
                 scheduler.init('scheduler_here', new Date(), "week");
                 scheduler.config.readonly_form = true;
@@ -210,15 +212,20 @@
                 scheduler.attachEvent("onClick", function () { return false; })
                 scheduler.config.details_on_dblclick = true;
                 scheduler.config.dblclick_create = false;
+                //scheduler.parse(self.agendamentos, "json");
                 scheduler.load("../../Json/events.json", "json");
+                //scheduler.load(dados, "json");
             },
             filtrarAgendamentos: function () {
                 var self = this;
                 $.ajax({
                     url: "../Home/getAgendamentos",
                     data: { navio: self.checkNavio, atividade: self.checkAtividade }
-                }).success(function () {
-                    
+                }).success(function (data) {
+                    debugger;
+                    scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+                    scheduler.parse(data, "json");
+                    scheduler.updateView();
                 });
             },
             initChart: function () {
@@ -227,7 +234,6 @@
         },
         mounted: function () {
             this.init();
-            this.filtrarAgendamentos();
             this.initChart();
         }
     })
