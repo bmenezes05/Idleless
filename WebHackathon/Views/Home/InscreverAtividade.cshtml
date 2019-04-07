@@ -56,8 +56,8 @@
                             <td>{{agendamento.pontuacao}}</td>
                             <td>
                                 <span v-if="agendamento.inserido">Inscrito</span>
-                                <a v-if="!agendamento.inserido" href="#" data-toggle="modal" data-target="#inscreverCurso">Inscrever-se</a>
-                                <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
+                                <a v-if="!agendamento.inserido" href="#" data-toggle="modal" :data-target="'#inscreverCurso' + agendamento.modalidadeID">Inscrever-se</a>
+                                <div class="modal fade" :id="'inscreverCurso' + agendamento.modalidadeID" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
