@@ -26,7 +26,7 @@ namespace WebHackathon.Controllers
             if (validado.HasValue)
                 ViewBag.Validado = validado.Value.ToString().ToLower();
             else
-                ViewBag.Validado = false;
+                ViewBag.Validado = "false";
 
             return View();
         }
@@ -37,8 +37,8 @@ namespace WebHackathon.Controllers
 
             try
             {
-                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
-                var result = await myHttp.Get(string.Concat("Agendamento/ObterPorPessoaId/", "1"));
+                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");                
+                var result = await myHttp.Get(string.Concat("Agendamento/ObterPorModalidadeId/", navio.ToString().ToLower(), "&", atividade.ToString().ToLower()));
                 MyFile.saveJson(result);
                 response.jsonCalendar = result;                
                 response.ResultCode = (int)HttpStatusCode.OK;

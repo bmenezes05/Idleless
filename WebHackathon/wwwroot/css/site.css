@@ -340,3 +340,46 @@ a:hover {
 .no-navbar {
     margin-top: -50px !important;
 }
+
+.dhx_cal_event.event_navio div,
+.dhx_cal_event_line.event_navio {
+    background-color: #FF5722 !important;
+    border-color: #732d16 !important;
+}
+
+.dhx_cal_event.dhx_cal_editor.event_navio {
+    background-color: #FF5722 !important;
+}
+
+.dhx_cal_event_clear.event_navio {
+    color: #FF5722 !important;
+}
+
+
+.dhx_cal_event.event_navio div,
+.dhx_cal_event_line.event_navio {
+    background-color: #FF5722 !important;
+    border-color: #732d16 !important;
+}
+
+.dhx_cal_event.dhx_cal_editor.event_navio {
+    background-color: #FF5722 !important;
+}
+
+.dhx_cal_event_clear.event_navio {
+    color: #FF5722 !important;
+}
+
+.dhx_cal_event.event_modalidade div,
+.dhx_cal_event_line.event_modalidade {
+    background-color: #0FC4A7 !important;
+    border-color: #698490 !important;
+}
+
+.dhx_cal_event.dhx_cal_editor.event_modalidade {
+    background-color: #0FC4A7 !important;
+}
+
+.dhx_cal_event_clear.event_modalidade {
+    color: #0FC4A7 !important;
+}

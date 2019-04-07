@@ -36,7 +36,7 @@
                         <label>Aula de pilates para fortalecer e melhorar a postura dos colaboradores</label>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="horarios"><b>QR Code <span v-show="validado">Validado</span></b></label><br />
+                        <label for="horarios"><b>QR Code <span v-show="validado" style="color: #0ba360">Validado</span></b></label><br />
 
                         <img :src="qrcode" />
 
@@ -98,7 +98,6 @@
             }
         },
         mounted: function () {
-            debugger;
             this.validado = @ViewBag.Validado;
             this.qrCode();
         }

@@ -71,7 +71,6 @@
                     <div class="col-12 text-center p-3">
                         <h3>11</h3>
                         <span class="numero-pontos-legenda">Número de pontos</span>
-
                         <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -116,7 +115,7 @@
                                         @Html.AntiForgeryToken()
                                     </div>
 
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -163,25 +162,26 @@
         </div>
     </div>
     <div id="dashboard" class="tab-pane fade col-12 row d-none" role="tabpanel">
-        <div class="col-md-12">
+        <div class="col-md-12 p-2 row">
             <div class="col-8">
+                <h4>
+                    Atividades mais procuradas
+                </h4>
+                <hr class="m-1" />
+                <div class="mt-3 p-3 bg-white">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-4">
                 <h4>
                     Cursos Realizados
                 </h4>
                 <hr class="m-1" />
-                <canvas id="myChart"></canvas>
+                <div class="mt-3 p-3 bg-white">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-8">
-                <h4>
-                    Cursos Realizados
-                </h4>
-                <hr class="m-1" />
-                <canvas id="myChart1"></canvas>
-            </div>
-        </div>
-
     </div>
     <div id="previsao" class="tab-pane fade row d-none" role="tabpanel">
         <div class="col-md-9 col-sm-12 mb-4 p-0">
@@ -242,32 +242,38 @@
                     data: { navio: self.checkNavio, atividade: self.checkAtividade }
                 }).success(function (result) {
                     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-                    //TODO: cores diferentes para tipos de modalidades diferentes
+                    scheduler.templates.event_class = function (start, end, event) {
+                        var css = "";
+                        debugger;
+
+                        if (event.tipo_modalidade == "Navio") // if event has subject property then special class should be assigned
+                            css += "event_navio";
+
+                        if (event.tipo_modalidade == "Lazer") // if event has subject property then special class should be assigned
+                            css += "event_modalidade";
+                    
+                        return css; // default return
+
+                        /*
+                            Note that it is possible to create more complex checks
+                            events with the same properties could have different CSS classes depending on the current view:
+
+                            var mode = scheduler.getState().mode;
+                            if(mode == "day"){
+                                // custom logic here
+                            }
+                            else {
+                                // custom logic here
+                            }
+                        */
+                    };
+
                     scheduler.parse(JSON.parse(result.data).data, "json");
                     scheduler.updateView();
                 });
             },
             initChart: function () {
                 var ctx = document.getElementById('myChart').getContext('2d');
-                var ctx1 = document.getElementById('myChart1').getContext('2d');
-                //var chart = new Chart(ctx, {
-                //    // The type of chart we want to create
-                //    type: 'line',
-
-                //    // The data for our dataset
-                //    data: {
-                //        labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos(sinuca, pebolim, ping pong)', 'Dentista'],
-                //        datasets: [{
-                //            label: 'My First dataset',
-                //            backgroundColor: 'rgb(255, 99, 132)',
-                //            borderColor: 'rgb(255, 99, 132)',
-                //            data: [0, 10, 5, 2, 20, 30]
-                //        }]
-                //    },
-
-                //    // Configuration options go here
-                //    options: {}
-                //});
 
                 var chart = new Chart(ctx, {
                     // The type of chart we want to create
@@ -275,36 +281,30 @@
 
                     // The data for our dataset
                     data: {
-                        labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos(sinuca, pebolim, ping pong)', 'Dentista'],
-                        datasets: [{
-                            label: 'My First dataset',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [0, 10, 5, 2, 20, 30]
-                        }]
-                    },
-
-                    // Configuration options go here
-                    options: {}
-                });
-
-                var chart = new Chart(ctx1, {
-                    // The type of chart we want to create
-                    type: 'bar',
-
-                    // The data for our dataset
-                    data: {
                         labels: ['Cursos bem estar', 'Massagem', 'Psicólogo', 'Academia', 'Jogos', 'Dentista'],
                         datasets: [{
-                            label: 'My First dataset',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [0, 10, 5, 2, 20, 30]
+                            backgroundColor: ['rgba(255, 99, 132, 0.4)',
+                                'rgba(54, 162, 235, 0.4)',
+                                'rgba(255, 206, 86, 0.4)',
+                                'rgba(75, 192, 192, 0.4)',
+                                'rgba(153, 102, 255, 0.4)',
+                                'rgba(255, 159, 64, 0.4)'],
+                            borderColor: ['rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'],
+                            borderWidth: 1,
+                            data: [3, 10, 5, 2, 20, 30]
                         }]
                     },
-
                     // Configuration options go here
-                    options: {}
+                    options: {
+                        legend: {
+                            display: false
+                        }
+                    }
                 });
             }
         },

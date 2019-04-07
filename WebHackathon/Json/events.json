@@ -1,1 +1,1 @@
-{"data":[{"id":"2","start_date":"2019-04-07 02:02","end_date":"2019-04-07 02:03","text":"blah teste","details":"teste de blah"},{"id":"3","start_date":"2019-04-07 03:12","end_date":"2019-04-07 03:12","text":"string teste2","details":"string"}]}
+{"data":[{"id":"2","start_date":"2019-04-07 02:02","end_date":"2019-04-07 02:03","text":"blah teste","details":"teste de blah","tipo_modalidade":"Navio"},{"id":"3","start_date":"2019-04-07 03:12","end_date":"2019-04-07 03:12","text":"string teste2","details":"string","tipo_modalidade":"Navio"}]}
