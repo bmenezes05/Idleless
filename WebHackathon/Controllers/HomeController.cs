@@ -57,7 +57,7 @@ namespace WebHackathon.Controllers
             return Json(new { data = imageDataURL }, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<ScoreResponse> setScore(string pessoaId, int score)
+        public async Task<ActionResult> setScore(string pessoaId, int score)
         {
             ScoreResponse response = new ScoreResponse();
 
@@ -71,9 +71,8 @@ namespace WebHackathon.Controllers
             {
                 response.ResultCode = (int)HttpStatusCode.InternalServerError;
             }
-
-       
-            return response;
+            
+            return View("~/Views/Home/DetalheAtividade.cshtml");
         }
 
         private byte[] ImageToByte2(Image img)
