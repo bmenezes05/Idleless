@@ -121,9 +121,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CrossCutting\AgendamentoResponse.cs" />
+    <Compile Include="CrossCutting\ResponseBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MyFile.cs" />
+    <Compile Include="Helper\MyHttp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +161,7 @@
     <Content Include="wwwroot\lib\popper\popper.min.js" />
     <Content Include="wwwroot\lib\vue\vue.js" />
     <Content Include="wwwroot\lib\vue\vue.min.js" />
+    <Content Include="Json\events.json" />
     <None Include="Properties\PublishProfiles\hackthonbtp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\hackthonbtp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
