@@ -9,16 +9,13 @@
                 Calendário
             </h4>
             <hr class="m-1" />
-            <div class="mt-3 p-4 bg-white" style="height: 400px;">
+            <div class="mt-3 p-4 bg-white" style="height: 600px;">
                 <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%'>
                     <div class="dhx_cal_navline">
                         <div class="dhx_cal_prev_button">&nbsp;</div>
                         <div class="dhx_cal_next_button">&nbsp;</div>
                         <div class="dhx_cal_today_button"></div>
                         <div class="dhx_cal_date"></div>
-                        <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-                        <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-                        <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
                     </div>
                     <div class="dhx_cal_header">
                     </div>
@@ -28,10 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 mb-4">
-            </div>
-        </div>
-    </div>
+
     <div class="col-md-3 col-sm-12 mb-4 p-0">
         <div class="col-12 mb-4">
             <h4>
@@ -100,7 +94,7 @@
         </div>
         <div class="col-12 mb-4">
             <h4>
-                Meus Atividade
+                Próximas atividades
             </h4>
             <hr class="m-1" />
             <div class="mt-3 px-2 pb-3 bg-white">
@@ -118,7 +112,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="col-12 text-right">                    
+                <div class="col-12 text-right">
                     <a href="../Home/InscreverAtividade">Inscrever-se</a>
                 </div>
                 @*<div v-if="carregando">
@@ -127,6 +121,15 @@
                                <div><b>Carregando</b></div>
                            </div>
                     </div>*@
+            </div>
+        </div>
+        <div class="col-12 mb-4">
+            <h4>
+                Maré
+            </h4>
+            <hr class="m-1" />
+            <div class="mt-3 p-0 bg-white">
+                <iframe class="col-12 p-0" height="300" src="https://embed.windy.com/embed2.html?lat=-30.259&lon=-40.034&zoom=5&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-30.259&detailLon=-40.034&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
             </div>
         </div>
         <div class="col-12 mb-4">
@@ -155,16 +158,16 @@
         el: '#containerIndex',
         data: {
 
-            },
-            methods: {
-                init: function () {
-                    scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-                    scheduler.init('scheduler_here', new Date(2018, 0, 1), "week");
-                    scheduler.load("../../Json/events.json", "json");
-                }
-            },
-            mounted: function () {
-                this.init();
+        },
+        methods: {
+            init: function () {
+                scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+                scheduler.init('scheduler_here', new Date(), "week");
+                scheduler.load("../../Json/events.json", "json");
             }
-        })
-    </script>
+        },
+        mounted: function () {
+            this.init();
+        }
+    })
+</script>
