@@ -5,12 +5,8 @@ using System.Web;
 
 namespace WebHackathon.CrossCutting
 {
-    public class AgendamentoResponseData
-    {
-    }
-
     public class AgendamentoResponse : ResponseBase
     {
-       
+        public string jsonCalendar { get; set; }
     }
 }

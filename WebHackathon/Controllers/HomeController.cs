@@ -39,7 +39,7 @@ namespace WebHackathon.Controllers
             {
                 MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
                 var result = await myHttp.Get(string.Concat("Agendamento/ObterPorPessoaId/", "1"));
-                MyFile.saveJson(result);
+                response.jsonCalendar = result;
                 response.ResultCode = (int)HttpStatusCode.OK;
             }
             catch (Exception ex)
