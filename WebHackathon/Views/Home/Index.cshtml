@@ -71,54 +71,7 @@
                     <div class="col-12 text-center p-3">
                         <h3>11</h3>
                         <span class="numero-pontos-legenda">Número de pontos</span>
-                        <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Inscrição</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body text-left">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="tipoModalidade">Tipo de Modalidade</label>
-                                                <input type="text" class="form-control" id="modalidade" aria-describedby="emailHelp" placeholder="Tipo de Modalidade">
-                                                <small id="emailHelp" class="form-text text-muted">Modalidades para lazer descontarão 1 ponto do seu banco.</small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="modalidade">Modalidade</label>
-                                                <input type="password" class="form-control" id="modalidade" placeholder="Modalidade">
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="horarios">Horários disponíveis</label>
-                                                    <select class="form-control" id="horarios">
-                                                        <option>12h até 13h</option>
-                                                        <option>22h até 23h</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputState">State</label>
-                                                    <select id="inputState" class="form-control">
-                                                        <option selected>Choose...</option>
-                                                        <option>...</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                                        <button data-dismiss="modal" class="btn btn-secondary">Inscrever</button>
-                                        @Html.AntiForgeryToken()
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                     @*<div v-if="carregando">
                                <div class="text-center">
@@ -145,6 +98,14 @@
                             <tr>
                                 <td><a href="../Home/DetalheAtividade">Palestra sobre segurança do trabalho</a></td>
                                 <td>18h - 19h</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../Home/DetalheAtividade">Psicólogo</a></td>
+                                <td>20h - 21h</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../Home/DetalheAtividade">Dentista</a></td>
+                                <td>23h - 00h</td>
                             </tr>
                         </tbody>
                     </table>
@@ -244,28 +205,13 @@
                     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
                     scheduler.templates.event_class = function (start, end, event) {
                         var css = "";
-                        debugger;
-
-                        if (event.tipo_modalidade == "Navio") // if event has subject property then special class should be assigned
+                        if (event.tipo_modalidade == "Navio") 
                             css += "event_navio";
 
-                        if (event.tipo_modalidade == "Lazer") // if event has subject property then special class should be assigned
+                        if (event.tipo_modalidade == "Lazer") 
                             css += "event_modalidade";
                     
-                        return css; // default return
-
-                        /*
-                            Note that it is possible to create more complex checks
-                            events with the same properties could have different CSS classes depending on the current view:
-
-                            var mode = scheduler.getState().mode;
-                            if(mode == "day"){
-                                // custom logic here
-                            }
-                            else {
-                                // custom logic here
-                            }
-                        */
+                        return css;
                     };
 
                     scheduler.parse(JSON.parse(result.data).data, "json");

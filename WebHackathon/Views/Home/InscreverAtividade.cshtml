@@ -24,12 +24,12 @@
                         <input type="password" class="form-control" id="modalidade" placeholder="Modalidade">
                     </div>
                     @*<div class="form-group col-md-4">
-                        <label for="horarios">Horários disponíveis</label>
-                        <select class="form-control" id="horarios">
-                            <option>12h até 13h</option>
-                            <option>22h até 23h</option>
-                        </select>
-                    </div>*@
+                            <label for="horarios">Horários disponíveis</label>
+                            <select class="form-control" id="horarios">
+                                <option>12h até 13h</option>
+                                <option>22h até 23h</option>
+                            </select>
+                        </div>*@
                 </div>
                 <div class="col-12 text-right">
                     <button v-on:click="buscarAgendamentos" class="btn btn-secondary">Buscar</button>
@@ -46,20 +46,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Palestra sobre segurança do trabalho</td>
-                            <td><span class="badge badge-danger">Obrigatória</span></td>
-                            <td>18h - 19h</td>
-                            <td>1</td>
-                            <td><a href="#">Inscrever-se</a></td>
+                        <tr v-for="agendamento in agendamentos">
+                            <td>{{agendamento.nome}}</td>
+                            <td><span class="badge" :class="{'badge-danger': agendamento.status == 'Obrigatória', 'badge-success': agendamento.status == 'Lazer', 'badge-info': agendamento.status == 'Opcional' }"> {{ agendamento.status }}</span></td>
+                            <td>{{agendamento.data}}</td>
+                            <td>{{agendamento.pontuacao}}</td>
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#inscreverCurso">Inscrever-se</a>
+                                <div class="modal fade" id="inscreverCurso" tabindex="-1" role="dialog" aria-labelledby="inscreverCurso" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Inscrição</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-left">
+                                                <span>Deseja se inscrever nesta atividade?</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                <button data-dismiss="modal" class="btn btn-secondary" v-on:click="inscreverAtividade">Inscrever</button>
+                                                @Html.AntiForgeryToken()
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
                         </tr>
-                        <tr>
+                        @*<tr>
                             <td>Pilates</td>
                             <td><span class="badge badge-success">Lazer</span></td>
-                            <td>13h - 14h</td>
+                            <td>Segunda, 20h - 21h</td>
                             <td>-1</td>
                             <td><a href="#">Inscrever-se</a></td>
                         </tr>
+                        <tr>
+                            <td>Academia</td>
+                            <td><span class="badge badge-success">Lazer</span></td>
+                            <td>Segunda, 23h - 00h</td>
+                            <td>-1</td>
+                            <td><a href="#">Inscrever-se</a></td>
+                        </tr>
+                        <tr>
+                            <td>Conscientização sobre consumo de álcool</td>
+                            <td><span class="badge badge-info">Opcional</span></td>
+                            <td>Terça, 09h - 10h</td>
+                            <td>1</td>
+                            <td><a href="#">Inscrever-se</a></td>
+                        </tr>*@
                     </tbody>
                 </table>
             </div>
@@ -70,12 +107,38 @@
     var app = new Vue({
         el: '#containerInscreverCurso',
         data: {
-
+            agendamentos: []
         },
         methods: {
             buscarAgendamentos: function () {
-                debugger;
                 $("#divAgendamento").show();
+                this.agendamentos = [{
+                    nome: "Palestra sobre segurança do trabalho",
+                    status: "Obrigatória",
+                    data: "Segunda, 18h - 19h",
+                    pontuacao: "1"
+                },
+                {
+                    nome: "Pilates",
+                    status: "Lazer",
+                    data: "Segunda, 20h - 21h",
+                    pontuacao: "-1"
+                    },
+                {
+                    nome: "Academia",
+                    status: "Lazer",
+                    data: "Segunda, 23h - 00h",
+                    pontuacao: "-1"
+                    },
+                {
+                    nome: "Conscientização sobre consumo de álcool",
+                    status: "Opcional",
+                    data: "	Terça, 09h - 10h",
+                    pontuacao: "1"
+                }]
+            },
+            inscreverAtividade: function () {
+                alert("todo");
             }
         },
         mounted: function () {
