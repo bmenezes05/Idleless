@@ -37,7 +37,9 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="horarios"><b>QR Code</b></label><br />
-                    
+                        
+                        <img :src="qrcode" />
+
                     </div>
                 </div>
                 <div class="col-12 text-right">
@@ -79,16 +81,36 @@
     var app = new Vue({
         el: '#containerInscreverCurso',
         data: {
-
+            qrcode: ""
         },
         methods: {
+            qrCode: function () {
+                var self = this;
+                $.ajax({
+                    url: "../Home/getQRCode"
+                }).success(function (data) {
+
+                    
+                    self.qrcode = data.data;
+                    
+                });
+            },
+            filtrarAgendamentos: function () {
+                var self = this;
+                $.ajax({
+                    url: "../Home/getAgendamentos",
+                    data: { navio: self.checkNavio, atividade: self.checkAtividade }
+                }).success(function () {
+
+                });
+            },
             buscarAgendamentos: function () {
                 debugger;
                 $("#divAgendamento").show();
             }
         },
         mounted: function () {
-
+            this.qrCode();
         }
     })
 </script>

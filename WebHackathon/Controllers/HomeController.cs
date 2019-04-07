@@ -26,15 +26,14 @@ namespace WebHackathon.Controllers
             return View();
         }
 
-        public AgendamentoResponse getAgendamentos(bool navio, bool atividade)
         public async Task<AgendamentoResponse> getAgendamentos(bool navio, bool atividade)
         {
             AgendamentoResponse response = new AgendamentoResponse();
 
             try
             {
-                MyHttp myHttp = new MyHttp();
-                var result = await myHttp.Get(@"https://hackathonbtpapi.azurewebsites.net/api/", string.Concat("Agendamento/ObterPorPessoaId/", "1"));
+                MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
+                var result = await myHttp.Get(string.Concat("Agendamento/ObterPorPessoaId/", "1"));
                 MyFile.saveJson(result);
                 response.ResultCode = (int)HttpStatusCode.OK;
             }
@@ -50,13 +49,22 @@ namespace WebHackathon.Controllers
         {
             JsonResult result = new JsonResult();
 
-            var bitmap = GerarQRCode(200, 200, "https://stackoverflow.com");
+            var bitmap = GerarQRCode(200, 200, "Home/setScore");
 
             byte[] imageByteData = ImageToByte2(bitmap);
             string imageBase64Data = Convert.ToBase64String(imageByteData);
             string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
             result.Data = imageDataURL;
-            return result;
+            return Json(new { data = imageDataURL }, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ScoreResponse> setScore(string pessoaId,int score)
+        {
+            ScoreResponse response = new ScoreResponse();
+            MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
+            var result = await myHttp.Post("Score/Pontuacao/", new { PessoaId = "", Pontuacao = "" });
+            response.ResultCode = (int)HttpStatusCode.OK;
+            return response;
         }
 
         private byte[] ImageToByte2(Image img)

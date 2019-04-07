@@ -135,6 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CrossCutting\AgendamentoResponse.cs" />
     <Compile Include="CrossCutting\ResponseBase.cs" />
+    <Compile Include="CrossCutting\ScoreResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
