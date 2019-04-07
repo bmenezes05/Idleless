@@ -474,6 +474,7 @@
     <Content Include="wwwroot\lib\jquery-validation\LICENSE.md" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <Content Include="Views\Home\DetalheAtividade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

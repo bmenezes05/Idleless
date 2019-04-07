@@ -142,7 +142,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Palestra sobre segurança do trabalho</td>
+                                <td><a href="../Home/DetalheAtividade">Palestra sobre segurança do trabalho</a></td>
                                 <td>18h - 19h</td>
                             </tr>
                         </tbody>
@@ -160,7 +160,9 @@
             </div>
         </div>
     </div>
-    <div id="dashboard" class="tab-pane fade col-12 row d-none" role="tabpanel"></div>
+    <div id="dashboard" class="tab-pane fade col-12 row d-none" role="tabpanel">
+
+    </div>
     <div id="previsao" class="tab-pane fade row d-none" role="tabpanel">
         <div class="col-md-9 col-sm-12 mb-4 p-0">
             <div class="col-12 mb-4">
@@ -216,13 +218,17 @@
                     url: "../Home/getAgendamentos",
                     data: { navio: self.checkNavio, atividade: self.checkAtividade }
                 }).success(function () {
-                    alert("sucesso");
+                    
                 });
+            },
+            initChart: function () {
+
             }
         },
         mounted: function () {
             this.init();
             this.filtrarAgendamentos();
+            this.initChart();
         }
     })
 </script>
