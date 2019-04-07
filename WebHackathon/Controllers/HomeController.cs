@@ -31,7 +31,7 @@ namespace WebHackathon.Controllers
             return View();
         }
 
-        public async Task<AgendamentoResponse> getAgendamentos(bool navio, bool atividade)
+        public async Task<ActionResult> getAgendamentos(bool navio, bool atividade)
         {
             AgendamentoResponse response = new AgendamentoResponse();
 
@@ -39,7 +39,8 @@ namespace WebHackathon.Controllers
             {
                 MyHttp myHttp = new MyHttp(@"https://hackathonbtpapi.azurewebsites.net/api/");
                 var result = await myHttp.Get(string.Concat("Agendamento/ObterPorPessoaId/", "1"));
-                response.jsonCalendar = result;
+                MyFile.saveJson(result);
+                response.jsonCalendar = result;                
                 response.ResultCode = (int)HttpStatusCode.OK;
             }
             catch (Exception ex)
@@ -47,7 +48,7 @@ namespace WebHackathon.Controllers
                 response.ResultCode = (int)HttpStatusCode.InternalServerError;
             }
 
-            return response;
+            return Json(new { data = response.jsonCalendar }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getQRCode()
